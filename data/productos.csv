@@ -1,0 +1,33 @@
+producto_id,nombre,categoria,precio
+1,Laptop HP Pavilion 15,Tecnología,850.0
+2,Laptop MacBook Pro 16,Tecnología,2500.0
+3,PC Gamer Ryzen 7 RTX 3070,Tecnología,1800.0
+4,Tarjeta Gráfica RTX 3080,Tecnología,950.0
+5,Procesador Intel i9-12900K,Tecnología,600.0
+6,Placa Base ASUS ROG STRIX Z690,Tecnología,300.0
+7,Mouse Logitech MX Master 3,Periféricos,99.99
+8,Teclado Mecánico Corsair K95,Periféricos,180.0
+9,Auriculares HyperX Cloud II,Periféricos,90.0
+10,Monitor Samsung 27'' Curvo,Periféricos,280.0
+11,Webcam Logitech C920,Periféricos,70.0
+12,Nevera Samsung No Frost,Electrodomésticos,1200.0
+13,Microondas LG Smart,Electrodomésticos,250.0
+14,Cafetera Nespresso Vertuo,Electrodomésticos,180.0
+15,Lavadora Whirlpool 15Kg,Electrodomésticos,800.0
+16,Bicicleta Montaña Trek,Deportes,550.0
+17,Pesas Ajustables Bowflex,Deportes,250.0
+18,Cinta de Correr NordicTrack,Deportes,1200.0
+19,Ropa Deportiva Nike,Deportes,75.0
+20,Sofá de Cuero 3 Plazas,Hogar,750.0
+21,Escritorio de Madera,Hogar,200.0
+22,Silla Ergonómica de Oficina,Hogar,150.0
+23,Lámpara de Pie LED,Hogar,80.0
+24,Libro: Fundamentos de Python,Libros,40.0
+25,Libro: Historia del Mundo,Libros,35.0
+26,Libro: Ciencia Ficción - Dune,Libros,30.0
+27,Multivitamínico Centrum,Salud,25.0
+28,Proteína Whey Optimum Nutrition,Salud,60.0
+29,Tensiómetro Digital Omron,Salud,50.0
+30,Zapatillas Adidas Ultraboost,Moda,150.0
+31,Reloj Inteligente Apple Watch,Moda,400.0
+32,Chaqueta de Cuero Negra,Moda,120.0
