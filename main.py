@@ -36,7 +36,7 @@ def menu(id):
         if option == '1':
             menu_products(id)
         elif option == '2':
-            pass
+            purchases_historial(id)
         elif option == '3':
             print('Cerrando sesión...')
             break

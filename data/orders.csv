@@ -1,1 +1,2 @@
 compra_id,usuario_id,producto_id,cantidad,precio_unitario,total,fecha
+1,1,22,3,150.0,450.0,2025-03-03

@@ -120,3 +120,14 @@ def buy_product(user_id, product):
     df_orders = pd.concat([df_orders, df_new_order], ignore_index=True)
     df_orders.to_csv('data/orders.csv', index=False)
     print('✅ Producto comprado con éxito.')
+
+def purchases_historial(user_id):
+    global df_orders, df_products
+    user_orders = df_orders[df_orders['usuario_id'] == user_id]
+    if user_orders.empty:
+        print('No tienes compras aún.')
+    else:
+        print('\nHistorial de compras')
+        for order in user_orders.iterrows():
+            product = df_products[df_products['producto_id'] == order[1]['producto_id']]
+            print(f"🔹 ID: {order[1]['compra_id']}: {product['nombre'].values[0]} - ${order[1]['total']}")
