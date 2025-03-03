@@ -24,6 +24,22 @@ def inicio():
             print('❌ Opción no válida. Intente nuevamente.')
             inicio()
 
+def menu(id):
+    print('\nMenú Principal')
+    print('1. Ver Productos')
+    print('2. Ver Historial de Compras')
+    print('3. Cerrar Sesión')
+    option = input('Opción: ')
+    if option == '1':
+        pass
+    elif option == '2':
+        pass
+    elif option == '3':
+        print('Cerrando sesión...')
+        inicio()
+    else:
+        print('❌ Opción no válida. Intente nuevamente.')
+        menu(id)
 
 if __name__ == '__main__':
     inicio()
