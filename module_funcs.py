@@ -25,7 +25,9 @@ def add_user():
         'fecha_registro': register_date
     }
 
-    df_users = pd.concat([df_users, new_user], ignore_index=True)
+    df_new_user = pd.DataFrame([new_user])
+
+    df_users = pd.concat([df_users, df_new_user], ignore_index=True)
     df_users.to_csv('data/users.csv', index=False)
     print(f"✅ Usuario '{user}' agregado con éxito.")
 
