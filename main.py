@@ -25,23 +25,24 @@ def inicio():
             inicio()
 
 def menu(id):
-    data_user = get_user_data(id)
-    print(f'\n👤 Bienvenido {data_user["usuario"].values[0]}')
-    print('\nMenú Principal')
-    print('1. Ver Productos')
-    print('2. Ver Historial de Compras')
-    print('3. Cerrar Sesión')
-    option = input('Opción: ')
-    if option == '1':
-        pass
-    elif option == '2':
-        pass
-    elif option == '3':
-        print('Cerrando sesión...')
-        inicio()
-    else:
-        print('❌ Opción no válida. Intente nuevamente.')
-        menu(id)
+    while True:
+        data_user = get_user_data(id)
+        print(f'\n👤 Bienvenido {data_user["usuario"].values[0]}')
+        print('\nMenú Principal')
+        print('1. Ver Productos')
+        print('2. Ver Historial de Compras')
+        print('3. Cerrar Sesión')
+        option = input('Opción: ')
+        if option == '1':
+            pass
+        elif option == '2':
+            pass
+        elif option == '3':
+            print('Cerrando sesión...')
+            break
+        else:
+            print('❌ Opción no válida. Intente nuevamente.')
+            menu(id)
 
 if __name__ == '__main__':
     inicio()
