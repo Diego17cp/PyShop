@@ -1,6 +1,8 @@
 # Import libraries
 import pandas as pd
 import datetime as dt
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 # Define DataFrames with the csv's data
 df_products = pd.read_csv('data/products.csv')
 df_users = pd.read_csv('data/users.csv', dtype={'contraseña': str})
@@ -131,3 +133,19 @@ def purchases_historial(user_id):
         for order in user_orders.iterrows():
             product = df_products[df_products['producto_id'] == order[1]['producto_id']]
             print(f"🔹 ID: {order[1]['compra_id']}: {product['nombre'].values[0]} - ${order[1]['total']}")
+
+def recommend_by_similarity(product_name, top_n=5):
+    global df_products
+
+    vectorizer = TfidfVectorizer()
+    tfidf_matrix = vectorizer.fit_transform(df_products['categoria'])
+
+    simimilarity = cosine_similarity(tfidf_matrix)
+
+    idx = df_products[df_products['nombre'] == product_name].index[0]
+
+    scores = list(enumerate(simimilarity[idx]))
+    scores = sorted(scores, key=lambda x: x[1], reverse=True)[1:top_n+1]
+
+    recommended_products = df_products.iloc[[i[0] for i in scores]][['nombre', 'categoria', 'precio']]
+    return recommended_products.to_dict(orient='records')
