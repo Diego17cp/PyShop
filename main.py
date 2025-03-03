@@ -34,7 +34,7 @@ def menu(id):
         print('3. Cerrar Sesión')
         option = input('Opción: ')
         if option == '1':
-            pass
+            menu_products()
         elif option == '2':
             pass
         elif option == '3':
@@ -60,21 +60,21 @@ def menu_products():
     print('9. Volver')
     option = input('Opción: ')
     if option == '1':
-        pass
+        list_products_by_category('Tecnología')
     elif option == '2':
-        pass
+        list_products_by_category('Periféricos')
     elif option == '3':
-        pass
+        list_products_by_category('Electrodomésticos')
     elif option == '4':
-        pass
+        list_products_by_category('Deportes')
     elif option == '5':
-        pass
+        list_products_by_category('Hogar')
     elif option == '6':
-        pass
+        list_products_by_category('Libros')
     elif option == '7':
-        pass
+        list_products_by_category('Salud')
     elif option == '8':
-        pass
+        list_products_by_category('Moda')
     elif option == '9':
         menu(id)
     else:

@@ -65,3 +65,24 @@ def get_user_data(user_id):
     global df_users
     user_data = df_users[df_users['usuario_id'] == user_id]
     return user_data
+
+def list_products_by_category(category):
+    global df_products
+    products = df_products[df_products['categoria'] == category]
+    print(f'\nProductos de la categoría {category}')
+    for product in products.iterrows():
+        print(f"🔹 ID: {product[1]['producto_id']}: {product[1]['nombre']} - ${product[1]['precio']}")
+    print('\n1. Comprar producto')
+    print('2. Volver')
+    print('3. Ir al menú principal')
+    option = input('Opción: ')
+    if option == '1':
+        print('Ingrese el nombre o el ID del producto que desea comprar:')
+        product = input('Producto: ')
+    elif option == '2':
+        pass
+    elif option == '3':
+        pass
+    else:
+        print('❌ Opción no válida. Intente nuevamente.')
+        list_products_by_category(category)
