@@ -47,8 +47,16 @@ def menu(id):
 def menu_products(user_id):
     while True:
         print('\nProductos')
-        print('Algunas recomendaciones para ti:')
-        # Recomendaciones de productos
+        print('\n🎯 Recomendaciones Personalizadas')
+        recommendations = final_recommend(user_id)
+
+        if not recommendations:
+            print('No hay productos recomendados para ti. 😢')
+            return
+        
+        for idx, product in enumerate(recommendations, 1):
+            print(f"🔹 {idx}. {product['nombre']} - {product['categoria']} - ${product['precio']}")
+
         print('Selecciona una de las categorías para ver más productos:')
         print('1. Tecnología')
         print('2. Periféricos')
