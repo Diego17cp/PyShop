@@ -155,6 +155,10 @@ def recommend_by_similarity(product_name, top_n=3):
 def recommend_by_colab(user_id, top_n=3):
     global df_orders, df_products
 
+    user_orders = df_orders[df_orders['usuario_id'] == user_id]
+    if user_orders.empty:
+        return get_popular_products(top_n)
+
     reader = Reader(rating_scale=(1, 5))
     data = Dataset.load_from_df(df_orders[['usuario_id', 'producto_id', 'total']], reader)
 
@@ -171,10 +175,23 @@ def recommend_by_colab(user_id, top_n=3):
 
     return df_products[df_products['producto_id'].isin([p[0] for p in predicts])][['nombre', 'categoria', 'precio']].to_dict(orient='records')
 
+def get_popular_products(top_n=3):
+    global df_orders, df_products
+
+    if df_orders.empty:
+        return df_products.sample(n=min(top_n, len(df_products)))[['nombre', 'categoria', 'precio']].to_dict(orient='records')
+    
+    product_counts = df_orders['producto_id'].value_counts()
+    popular_products = df_products[df_products['producto_id'].isin(product_counts.index[:top_n])]
+
+    return popular_products[['nombre', 'categoria', 'precio']].to_dict(orient='records')
+
 def final_recommend(user_id, top_n=5):
     global df_orders, df_products
 
     user_orders = df_orders[df_orders['usuario_id'] == user_id]['producto_id'].tolist()
+    if not user_orders:
+        return get_popular_products(top_n)
 
     recommends = []
 
