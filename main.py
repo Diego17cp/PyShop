@@ -44,5 +44,42 @@ def menu(id):
             print('❌ Opción no válida. Intente nuevamente.')
             menu(id)
 
+def menu_products():
+    print('\nProductos')
+    print('Algunas recomendaciones para ti:')
+    # Recomendaciones de productos
+    print('Selecciona una de las categorías para ver más productos:')
+    print('1. Tecnología')
+    print('2. Periféricos')
+    print('3. Electrodomésticos')
+    print('4. Deportes')
+    print('5. Hogar')
+    print('6. Libros')
+    print('7. Salud')
+    print('8. Moda')
+    print('9. Volver')
+    option = input('Opción: ')
+    if option == '1':
+        pass
+    elif option == '2':
+        pass
+    elif option == '3':
+        pass
+    elif option == '4':
+        pass
+    elif option == '5':
+        pass
+    elif option == '6':
+        pass
+    elif option == '7':
+        pass
+    elif option == '8':
+        pass
+    elif option == '9':
+        menu(id)
+    else:
+        print('❌ Opción no válida. Intente nuevamente.')
+        menu_products()
+
 if __name__ == '__main__':
     inicio()
