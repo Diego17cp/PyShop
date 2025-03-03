@@ -136,7 +136,7 @@ def purchases_historial(user_id):
             product = df_products[df_products['producto_id'] == order[1]['producto_id']]
             print(f"🔹 ID: {order[1]['compra_id']}: {product['nombre'].values[0]} - ${order[1]['total']}")
 
-def recommend_by_similarity(product_name, top_n=5):
+def recommend_by_similarity(product_name, top_n=3):
     global df_products
 
     vectorizer = TfidfVectorizer()
@@ -171,3 +171,23 @@ def recommend_by_colab(user_id, top_n=3):
 
     return df_products[df_products['producto_id'].isin([p[0] for p in predicts])][['nombre', 'categoria', 'precio']].to_dict(orient='records')
 
+def final_recommend(user_id, top_n=5):
+    global df_orders, df_products
+
+    user_orders = df_orders[df_orders['usuario_id'] == user_id]['producto_id'].tolist()
+
+    recommends = []
+
+    for product_id in user_orders:
+        product_name = df_products[df_products['producto_id'] == product_id]['nombre'].values[0]
+        similar = recommend_by_similarity(product_name, top_n)
+        recommends.extend(similar)
+
+    colab = recommend_by_colab(user_id, top_n)
+
+    final_recommend = {
+        p['nombre']: p
+        for p in (recommends + colab)
+    }.values()
+
+    return list(final_recommend)[:top_n]
