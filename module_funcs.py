@@ -3,6 +3,8 @@ import pandas as pd
 import datetime as dt
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from surprise import Dataset, Reader, SVD
+from surprise.model_selection import train_test_split
 # Define DataFrames with the csv's data
 df_products = pd.read_csv('data/products.csv')
 df_users = pd.read_csv('data/users.csv', dtype={'contraseña': str})
@@ -149,3 +151,23 @@ def recommend_by_similarity(product_name, top_n=5):
 
     recommended_products = df_products.iloc[[i[0] for i in scores]][['nombre', 'categoria', 'precio']]
     return recommended_products.to_dict(orient='records')
+
+def recommend_by_colab(user_id, top_n=3):
+    global df_orders, df_products
+
+    reader = Reader(rating_scale=(1, 5))
+    data = Dataset.load_from_df(df_orders[['usuario_id', 'producto_id', 'total']], reader)
+
+    trainset, testset = train_test_split(data, test_size=.2)
+    model = SVD()
+    model.fit(trainset)
+
+    available_products = df_products['producto_id'].unique()
+    predicts = [
+        (p_id, model.predict(user_id, p_id).est)
+        for p_id in available_products
+    ]
+    predicts = sorted(predicts, key=lambda x: x[1], reverse=True)[:top_n]
+
+    return df_products[df_products['producto_id'].isin([p[0] for p in predicts])][['nombre', 'categoria', 'precio']].to_dict(orient='records')
+
