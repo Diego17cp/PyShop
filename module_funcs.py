@@ -136,13 +136,46 @@ def buy_product(user_id, product):
 def purchases_historial(user_id):
     global df_orders, df_products
     user_orders = df_orders[df_orders['usuario_id'] == user_id]
+    
     if user_orders.empty:
-        print('No tienes compras aún.')
+        print('\n' + '='*50)
+        print('📋 Historial de Compras')
+        print('='*50)
+        print('\n❌ No tienes compras realizadas aún.')
+        return
+
+    print('\n' + '='*50)
+    print('📋 Historial de Compras')
+    print('='*50)
+
+    total_spent = user_orders['total'].sum()
+    total_items = user_orders['cantidad'].sum()
+
+    user_orders = user_orders.sort_values('fecha', ascending=False)
+    for order in user_orders.iterrows():
+        product = df_products[df_products['producto_id'] == order[1]['producto_id']]
+        print(f"\n🛍️  Compra ID: {order[1]['compra_id']}")
+        print(f"   ├─ Producto: {product['nombre'].values[0]}")
+        print(f"   ├─ Cantidad: {order[1]['cantidad']}")
+        print(f"   ├─ Precio Unitario: ${order[1]['precio_unitario']:.2f}")
+        print(f"   ├─ Total: ${order[1]['total']:.2f}")
+        print(f"   └─ Fecha: {order[1]['fecha']}")
+    
+    print('\n' + '-'*50)
+    print('📊 Resumen de Compras')
+    print(f"   ├─ Total Gastado: ${total_spent:.2f}")
+    print(f"   └─ Productos Comprados: {total_items}")
+    
+    print('\n╔═════════════════════════╗')
+    print('║ 1. Volver al menú       ║')
+    print('╚═════════════════════════╝')
+    option = input('➤ Opción: ')
+    
+    if option == '1':
+        return
     else:
-        print('\nHistorial de compras')
-        for order in user_orders.iterrows():
-            product = df_products[df_products['producto_id'] == order[1]['producto_id']]
-            print(f"🔹 ID: {order[1]['compra_id']}: {product['nombre'].values[0]} - ${order[1]['total']}")
+        print('❌ Opción no válida. Volviendo al menú...')
+        return
 
 def recommend_by_similarity(product_name, top_n=3):
     global df_products
