@@ -42,7 +42,7 @@ def login_user():
     while att > 0:
         user_data = df_users[(df_users['usuario'] == user) & (df_users['contraseña'] == password)]
         if not user_data.empty:
-            print(f"✅ Bienvenido {user_data['nombre'].values[0]}")
+            print(f"✅ Iniciando sesión como '{user}'...")
             return {
                 'response': True,
                 'user_id': user_data['usuario_id'].values[0],

@@ -25,6 +25,8 @@ def inicio():
             inicio()
 
 def menu(id):
+    data_user = get_user_data(id)
+    print(f'\n👤 Bienvenido {data_user["usuario"].values[0]}')
     print('\nMenú Principal')
     print('1. Ver Productos')
     print('2. Ver Historial de Compras')
