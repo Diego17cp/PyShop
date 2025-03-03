@@ -73,13 +73,21 @@ def get_user_data(user_id):
 def list_products_by_category(category, user_id):
     global df_products
     products = df_products[df_products['categoria'] == category]
-    print(f'\nProductos de la categoría {category}')
+    print('\n' + '='*50)
+    print(f'📦 Productos de {category}')
+    print('='*50)
+    
     for product in products.iterrows():
-        print(f"🔹 ID: {product[1]['producto_id']}: {product[1]['nombre']} - ${product[1]['precio']}")
-    print('\n1. Comprar producto')
-    print('2. Volver')
-    print('3. Ir al menú principal')
-    option = input('Opción: ')
+        print(f"\n🔹 ID: {product[1]['producto_id']}")
+        print(f"   └─ {product[1]['nombre']}")
+        print(f"      └─ ${product[1]['precio']:.2f}")
+    
+    print('\n╔═════════════════════════╗')
+    print('║ 1. Comprar producto     ║')
+    print('║ 2. Volver              ║')
+    print('║ 3. Ir al menú          ║')
+    print('╚═════════════════════════╝')
+    option = input('➤ Opción: ')
     if option == '1':
         print('Ingrese el nombre o el ID del producto que desea comprar:')
         product = input('Producto: ')
