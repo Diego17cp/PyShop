@@ -31,6 +31,7 @@ def add_user():
     df_users.to_csv('data/users.csv', index=False)
     print(f"✅ Usuario '{user}' agregado con éxito.")
 
+# Func login user
 def login_user():
     global df_users
     att = 3
@@ -58,3 +59,9 @@ def login_user():
                 return {
                     'response': False,
                 }
+
+# Func get data from user by id
+def get_user_data(user_id):
+    global df_users
+    user_data = df_users[df_users['usuario_id'] == user_id]
+    return user_data
