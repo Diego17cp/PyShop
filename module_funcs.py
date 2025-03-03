@@ -66,7 +66,7 @@ def get_user_data(user_id):
     user_data = df_users[df_users['usuario_id'] == user_id]
     return user_data
 
-def list_products_by_category(category):
+def list_products_by_category(category, user_id):
     global df_products
     products = df_products[df_products['categoria'] == category]
     print(f'\nProductos de la categoría {category}')
@@ -79,6 +79,7 @@ def list_products_by_category(category):
     if option == '1':
         print('Ingrese el nombre o el ID del producto que desea comprar:')
         product = input('Producto: ')
+        buy_product(user_id, product)
     elif option == '2':
         pass
     elif option == '3':
@@ -86,3 +87,36 @@ def list_products_by_category(category):
     else:
         print('❌ Opción no válida. Intente nuevamente.')
         list_products_by_category(category)
+
+def buy_product(user_id, product):
+    global df_orders, df_products
+
+    if product.isdigit():
+        product_id = int(product)
+        product_match = df_products[df_products['producto_id'] == product_id]
+    else:
+        product_match = df_products[df_products['nombre'] == product]
+        
+    quantity = int(input('Ingrese la cantidad de productos a comprar: '))
+    if quantity <= 0:
+        print('❌ La cantidad debe ser mayor a 0.')
+        
+    product_id = product_match['producto_id'].values[0]
+    precio = product_match['precio'].values[0]
+    total = precio * quantity
+    new_id = df_orders['compra_id'].max() + 1 if not df_orders.empty else 1
+    date = dt.datetime.now().strftime('%Y-%m-%d')
+
+    new_order = {
+        'compra_id': new_id,
+        'usuario_id': user_id,
+        'producto_id': product_id,
+        'cantidad': quantity,
+        'precio_unitario': precio,
+        'total': total,
+        'fecha': date
+    }
+    df_new_order = pd.DataFrame([new_order])
+    df_orders = pd.concat([df_orders, df_new_order], ignore_index=True)
+    df_orders.to_csv('data/orders.csv', index=False)
+    print('✅ Producto comprado con éxito.')

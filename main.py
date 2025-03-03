@@ -34,7 +34,7 @@ def menu(id):
         print('3. Cerrar Sesión')
         option = input('Opción: ')
         if option == '1':
-            menu_products()
+            menu_products(id)
         elif option == '2':
             pass
         elif option == '3':
@@ -44,7 +44,7 @@ def menu(id):
             print('❌ Opción no válida. Intente nuevamente.')
             menu(id)
 
-def menu_products():
+def menu_products(user_id):
     print('\nProductos')
     print('Algunas recomendaciones para ti:')
     # Recomendaciones de productos
@@ -60,26 +60,26 @@ def menu_products():
     print('9. Volver')
     option = input('Opción: ')
     if option == '1':
-        list_products_by_category('Tecnología')
+        list_products_by_category('Tecnología', user_id)
     elif option == '2':
-        list_products_by_category('Periféricos')
+        list_products_by_category('Periféricos', user_id)
     elif option == '3':
-        list_products_by_category('Electrodomésticos')
+        list_products_by_category('Electrodomésticos', user_id)
     elif option == '4':
-        list_products_by_category('Deportes')
+        list_products_by_category('Deportes', user_id)
     elif option == '5':
-        list_products_by_category('Hogar')
+        list_products_by_category('Hogar', user_id)
     elif option == '6':
-        list_products_by_category('Libros')
+        list_products_by_category('Libros', user_id)
     elif option == '7':
-        list_products_by_category('Salud')
+        list_products_by_category('Salud', user_id)
     elif option == '8':
-        list_products_by_category('Moda')
+        list_products_by_category('Moda', user_id)
     elif option == '9':
-        menu(id)
+        menu(user_id)
     else:
         print('❌ Opción no válida. Intente nuevamente.')
-        menu_products()
+        menu_products(user_id)
 
 if __name__ == '__main__':
     inicio()
