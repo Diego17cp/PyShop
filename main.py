@@ -45,41 +45,46 @@ def menu(id):
             menu(id)
 
 def menu_products(user_id):
-    print('\nProductos')
-    print('Algunas recomendaciones para ti:')
-    # Recomendaciones de productos
-    print('Selecciona una de las categorías para ver más productos:')
-    print('1. Tecnología')
-    print('2. Periféricos')
-    print('3. Electrodomésticos')
-    print('4. Deportes')
-    print('5. Hogar')
-    print('6. Libros')
-    print('7. Salud')
-    print('8. Moda')
-    print('9. Volver')
-    option = input('Opción: ')
-    if option == '1':
-        list_products_by_category('Tecnología', user_id)
-    elif option == '2':
-        list_products_by_category('Periféricos', user_id)
-    elif option == '3':
-        list_products_by_category('Electrodomésticos', user_id)
-    elif option == '4':
-        list_products_by_category('Deportes', user_id)
-    elif option == '5':
-        list_products_by_category('Hogar', user_id)
-    elif option == '6':
-        list_products_by_category('Libros', user_id)
-    elif option == '7':
-        list_products_by_category('Salud', user_id)
-    elif option == '8':
-        list_products_by_category('Moda', user_id)
-    elif option == '9':
-        menu(user_id)
-    else:
-        print('❌ Opción no válida. Intente nuevamente.')
-        menu_products(user_id)
+    while True:
+        print('\nProductos')
+        print('Algunas recomendaciones para ti:')
+        # Recomendaciones de productos
+        print('Selecciona una de las categorías para ver más productos:')
+        print('1. Tecnología')
+        print('2. Periféricos')
+        print('3. Electrodomésticos')
+        print('4. Deportes')
+        print('5. Hogar')
+        print('6. Libros')
+        print('7. Salud')
+        print('8. Moda')
+        print('9. Volver')
+        option = input('Opción: ')
+        if option == '1':
+            result = list_products_by_category('Tecnología', user_id)
+        elif option == '2':
+            result = list_products_by_category('Periféricos', user_id)
+        elif option == '3':
+            result = list_products_by_category('Electrodomésticos', user_id)
+        elif option == '4':
+            result = list_products_by_category('Deportes', user_id)
+        elif option == '5':
+            result = list_products_by_category('Hogar', user_id)
+        elif option == '6':
+            result = list_products_by_category('Libros', user_id)
+        elif option == '7':
+            result = list_products_by_category('Salud', user_id)
+        elif option == '8':
+            result = list_products_by_category('Moda', user_id)
+        elif option == '9':
+            break
+        else:
+            print('❌ Opción no válida. Intente nuevamente.')
+            continue
+        if result == 'main_menu':
+            break
+        elif result == 'back':
+            continue
 
 if __name__ == '__main__':
     inicio()

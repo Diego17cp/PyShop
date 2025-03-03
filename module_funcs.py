@@ -81,9 +81,9 @@ def list_products_by_category(category, user_id):
         product = input('Producto: ')
         buy_product(user_id, product)
     elif option == '2':
-        pass
+        return 'back'
     elif option == '3':
-        pass
+        return 'main_menu'
     else:
         print('❌ Opción no válida. Intente nuevamente.')
         list_products_by_category(category)
